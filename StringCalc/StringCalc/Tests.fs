@@ -20,7 +20,7 @@ type Awesome() = class
 
     [<Test>]
     member self.SingleNumberReturnsValue() =
-        let values = Enumerable.Range(-5,5)
+        let values = Enumerable.Range(0, 5)
 
         for value in values do
             Assert.AreEqual(value, StringCalc(value.ToString()))
@@ -42,4 +42,15 @@ type Awesome() = class
         let expected = 6
         Assert.AreEqual(expected, StringCalc(value))
         
+    [<Test>]
+    member self.CustomDelimiter() =
+        let value = "//;\n1;2"
+        let expected = 3
+        Assert.AreEqual(expected, StringCalc(value))
+
+    [<Test>]
+    member self.CustomMultiCharDelimiter() =
+        let value = "//###\n1###2"
+        let expected = 3
+        Assert.AreEqual(expected, StringCalc(value))
 end
