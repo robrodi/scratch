@@ -4,7 +4,7 @@ open System
 open System.Collections.Generic
 open System.Linq
 open System.Text.RegularExpressions
-let numbersRegex = new Regex("^(//(?'delimiter'.+)\n)?(?'numbers'(-?\d+([,\n]|\k<delimiter>)? ?)+)$", RegexOptions.ExplicitCapture)
+let numbersRegex = new Regex("^(//((?'delimiter'.)|\[(?'delimiter'[^\n]+)\])\n)?" + "(?'numbers'(-?\d+([,\n]|\k<delimiter>)? ?)+)$", RegexOptions.ExplicitCapture)
 
 let StringCalc(text: string) : int =
     if String.IsNullOrWhiteSpace(text) then 0
@@ -16,7 +16,6 @@ let StringCalc(text: string) : int =
 
             let delimiters = if String.IsNullOrEmpty(m.Groups.["delimiter"].Value) then standardDelimiters else standardDelimiters.Concat([| m.Groups.["delimiter"].Value |]).ToArray()
             let numbers = text.Split(delimiters, StringSplitOptions.RemoveEmptyEntries)
-            
             let mutable sum = 0
             let negatives = new List<int>()
             
@@ -31,4 +30,5 @@ let StringCalc(text: string) : int =
             else                 
                 sum
         else
+            Console.WriteLine("Fail")
             0

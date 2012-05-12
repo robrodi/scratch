@@ -50,7 +50,7 @@ type Awesome() = class
 
     [<Test>]
     member self.CustomMultiCharDelimiter() =
-        let value = "//###\n1###2"
+        let value = "//[###]\n1###2"
         let expected = 3
         Assert.AreEqual(expected, StringCalc(value))
     
@@ -79,5 +79,4 @@ type Awesome() = class
         let expected = 3
         let actual = StringCalc(value)
         Assert.AreEqual(expected, actual)
-
 end
