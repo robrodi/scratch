@@ -63,4 +63,15 @@ type Awesome() = class
         with
             | :? ArgumentOutOfRangeException as ex -> printfn "Exception"
 
+    [<Test>]
+    member self.NegativeNumbersAggregateThenThrow() =
+        let value = "1,-2,-3"
+        try
+            StringCalc(value) |> ignore
+            Assert.Fail("Should Throw")
+        with
+            | :? ArgumentOutOfRangeException as ex -> 
+                Console.WriteLine(ex.Message)
+                Assert.IsTrue(ex.Message.Contains("-3"), "Should contain the second negative number")
+
 end
