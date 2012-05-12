@@ -1,6 +1,7 @@
 ﻿// Learn more about F# at http://fsharp.net
 module Module1
 open System
+open System.Collections.Generic
 open System.Linq
 open System.Text.RegularExpressions
 let numbersRegex = new Regex("^(//(?'delimiter'.+)\n)?(?'numbers'(-?\d+([,\n]|\k<delimiter>)? ?)+)$", RegexOptions.ExplicitCapture)
@@ -16,7 +17,10 @@ let StringCalc(text: string) : int =
             let numbers = text.Split(delimiters, StringSplitOptions.RemoveEmptyEntries)
             let mutable sum = 0
             for i in numbers do
-                sum <- sum + Int32.Parse(i.Trim())
+                let n = Int32.Parse(i.Trim())
+                if n >= 0 then sum <- sum + n
+                else 
+                    raise (ArgumentOutOfRangeException("Negative Number"))
             sum
         else
             0

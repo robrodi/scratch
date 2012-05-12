@@ -53,4 +53,14 @@ type Awesome() = class
         let value = "//###\n1###2"
         let expected = 3
         Assert.AreEqual(expected, StringCalc(value))
+    
+    [<Test>]
+    member self.NegativeNumbersThrow() =
+        let value = "1,-2"
+        try
+            StringCalc(value) |> ignore
+            Assert.Fail("Should Throw")
+        with
+            | :? ArgumentOutOfRangeException as ex -> printfn "Exception"
+
 end
