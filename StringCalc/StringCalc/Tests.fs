@@ -73,5 +73,11 @@ type Awesome() = class
             | :? ArgumentOutOfRangeException as ex -> 
                 Console.WriteLine(ex.Message)
                 Assert.IsTrue(ex.Message.Contains("-3"), "Should contain the second negative number")
+    [<Test>]
+    member self.Ignore1k() =
+        let value = "1,2,100000"
+        let expected = 3
+        let actual = StringCalc(value)
+        Assert.AreEqual(expected, actual)
 
 end

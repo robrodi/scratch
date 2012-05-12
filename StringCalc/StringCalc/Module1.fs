@@ -13,15 +13,19 @@ let StringCalc(text: string) : int =
         if (m.Success) then
             let text = m.Groups.["numbers"].Value
             let standardDelimiters = [|","; "\n" |];
+
             let delimiters = if String.IsNullOrEmpty(m.Groups.["delimiter"].Value) then standardDelimiters else standardDelimiters.Concat([| m.Groups.["delimiter"].Value |]).ToArray()
             let numbers = text.Split(delimiters, StringSplitOptions.RemoveEmptyEntries)
+            
             let mutable sum = 0
             let negatives = new List<int>()
+            
             for i in numbers do
                 let n = Int32.Parse(i.Trim())
-                if n >= 0 then sum <- sum + n
-                else 
+                if n >= 0 && n <= 1000 then sum <- sum + n
+                else if n < 0 then 
                     negatives.Add(n)
+
             if negatives.Count > 0 then
                 raise (ArgumentOutOfRangeException("text", "Negative Numbers: " + negatives.Select(fun n -> n.ToString()).Aggregate(fun cat n -> cat + " " + n)))
             else                 
