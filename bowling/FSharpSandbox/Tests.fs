@@ -7,9 +7,8 @@ open Module1
 
 [<TestFixture>]
 type Awesome() = class
-    let value x = [| x; x |]
-    let zeroFrame = value 0
-    let strike = [| 10 |]
+    let zeroFrame = [0;0]
+    let strike = [ 10 ]
 
     [<Test>]
     member self.SomeTest() = 
@@ -26,28 +25,28 @@ type Awesome() = class
     [<Test>]
     member self.OnePin() = 
         let expected = 1;
-        let scores = [| 1; 0 |] :: List.replicate 9 zeroFrame
+        let scores = [ 1; 0 ] :: List.replicate 9 zeroFrame
         let actual = score(scores)
         Assert.AreEqual(expected, actual)
 
     [<Test>]
     member self.OnePinOnEachRoll() = 
         let expected = 20;
-        let scores = List.replicate 10 [| 1; 1 |]
+        let scores = List.replicate 10 [ 1; 1 ]
         let actual = score(scores)
         Assert.AreEqual(expected, actual)
 
     [<Test>]
     member self.Spare() = 
         let expected = 15;
-        let scores = value 5 :: [| 2; 1 |] :: List.replicate 8 zeroFrame
+        let scores = [ 5; 5 ] :: [ 2; 1 ] :: List.replicate 8 zeroFrame
         let actual = score(scores)
         Assert.AreEqual(expected, actual)
 
     [<Test>]
     member self.Strike() = 
         let expected = 24;
-        let scores = strike :: [| 3; 4 |] :: List.replicate 8 zeroFrame
+        let scores = strike :: [ 3; 4 ] :: List.replicate 8 zeroFrame
         let actual = score(scores)
         Assert.AreEqual(expected, actual)
 
