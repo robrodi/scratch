@@ -8,9 +8,9 @@ open System.Linq
 let score(frames: IEnumerable<int[]>) : int =
     let mutable sum = 0;
     let frameSum (frame : int[]) = if frame.Length = 2 then frame.[0] + frame.[1] else frame.[0]
-    let flatSum list = List.fold (fun acc elem -> acc + elem) 0 list
+//    let flatSum list = List.fold (fun acc elem -> acc + elem) 0 list
     let isSpare frame = frameSum frame = 10
-    let isStrike (frame : int[]) = frame.[0] = 10
+    let isStrike frame = frameSum frame = 10 && frame.Length = 1
 
     let framesArray = frames.ToArray()
 
