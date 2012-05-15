@@ -1,9 +1,6 @@
 ﻿// Learn more about F# at http://fsharp.net
 
 module Module1
-open System
-open System.Collections.Generic
-open System.Linq
 
 let score(frames: int list list) : int =
     let mutable sum = 0;
@@ -13,7 +10,7 @@ let score(frames: int list list) : int =
     let isStrike frame = frameSum frame = 10 && frame.Length = 1
 
     if frames.Length > 0 then
-        for i = 0 to Math.Min(frames.Length - 1, 9) do
+        for i = 0 to min (frames.Length - 1)  9 do
             let frame = frames.[i]
 
             let hasNextFrame = (i + 1) < frames.Length
