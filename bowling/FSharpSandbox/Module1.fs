@@ -1,6 +1,4 @@
-﻿// Learn more about F# at http://fsharp.net
-
-module Module1
+﻿module Module1
 
 let maximumFrames = 10
 let score(frames: int list list) : int =
